@@ -8,7 +8,7 @@ import {
 import { useEffect, useState } from "react";
 import { useTheme } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
-import apiRequest from "./../../helpers/apiRequest"
+import apiRequest from "./../../helpers/apiRequest";
 
 const RegistrationForm = () => {
   const [lName, setLName] = useState("");
@@ -18,6 +18,7 @@ const RegistrationForm = () => {
   const [isValid, setIsValid] = useState(
     password === passwordReType ? true : false
   );
+  const [userCreated, setUserCreated] = useState(false);
   const navigate = useNavigate();
 
   const handleSetPassword = (e) => {
@@ -26,16 +27,12 @@ const RegistrationForm = () => {
   const handlePassRetype = (e) => {
     setPasswordReType(e.target.value);
   };
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (isValid) {
-      var User = JSON.parse(localStorage.getItem("User"));
-      User.userName=fName;
-      User.fName=fName;
-      User.lName=lName;
-      User.password=password;
-      localStorage.setItem("User",JSON.stringify(User));
-      apiRequest("CreateUSer",User,"POST").then((response)=>{console.log(response)});
+      apiRequest("CreateUSer", User, "POST").then((response) => {
+        setUserCreated(response.Success);
+      });
     } else {
       console.log(2);
     }
@@ -47,6 +44,17 @@ const RegistrationForm = () => {
   useEffect(() => {
     !localStorage.getItem("User") ? navigate("/") : null;
   }, []);
+  useEffect(() => {
+    if (userCreated) {
+      var User = JSON.parse(localStorage.getItem("User"));
+      User.userName = fName;
+      User.fName = fName;
+      User.lName = lName;
+      User.password = password;
+      localStorage.setItem("User", JSON.stringify(User));
+      navigate("/Login");
+    }
+  }, [userCreated]);
 
   const theme = useTheme();
   const mainColor = theme.colors.main;
