@@ -1,0 +1,41 @@
+.arrow{
+  cursor: pointer;
+  position:relative;
+  display:block;
+  width:30px;
+  height: 30px;
+  border: solid 2px #999;
+  border-radius: 100%;
+  z-index: 1;
+  transition: all .2s linear;
+  &:before, &:after{
+    content:"";
+    position: absolute;
+    width:35%;
+    height: 10%;
+    top:41%;
+    left:55%;
+    background: #999;
+    z-index: 2;
+    transform: translate(-50%, -50%) rotate(45deg);
+    transition: all .2s linear;
+  }
+  &:after{
+    z-index: 3;
+    top:59%;
+    left:55%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+  }
+  &:hover{
+    border: solid 4px #777;
+    &:after, &:before{
+      background: #777;
+    }
+  }
+  &:active{
+    border: solid 4px #111;
+    &:after, &:before{
+      background: #111;
+    }
+  }
+}

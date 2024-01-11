@@ -69,8 +69,9 @@ export const EmailForm = () => {
   };
 
   const handleKey = (e) => {
-    e.preventDefault();
+     
     if (e.key === "Enter") {
+      e.preventDefault();
       if (typeBtn === "submit") {
         handleRegisterSubmit(e);
       } else {

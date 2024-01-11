@@ -4,11 +4,16 @@ import {
   Input,
   FormErrorMessage,
   Button,
+  Image,
+  Box,
 } from "@chakra-ui/react";
+import monkeyClosed from "./../../assets/MonkeyNoEyes.png";
+import monkeyNoSpeak from "./../../assets/MonkeyNoSpeak.png";
 import { useEffect, useState } from "react";
 import { useTheme } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import apiRequest from "./../../helpers/apiRequest";
+
 
 const RegistrationForm = () => {
   const [lName, setLName] = useState("");
@@ -19,14 +24,20 @@ const RegistrationForm = () => {
     password === passwordReType ? true : false
   );
   const [userCreated, setUserCreated] = useState(false);
+  const [showPass, setShowPass] = useState(false);
   const navigate = useNavigate();
 
   const handleSetPassword = (e) => {
     setPassword(e.target.value);
   };
+
   const handlePassRetype = (e) => {
     setPasswordReType(e.target.value);
   };
+  const handleShowPass = () => {
+    setShowPass((prevShowPass) => !prevShowPass);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (isValid) {
@@ -37,6 +48,7 @@ const RegistrationForm = () => {
       console.log(2);
     }
   };
+
   useEffect(() => {
     setIsValid(password === passwordReType);
   }, [password, passwordReType]);
@@ -103,19 +115,22 @@ const RegistrationForm = () => {
             color={theme.colors.main[500]}
             textColor={theme.colors.main[500]}
             variant="flushed"
-            type="password"
+            type={!showPass ? "password" : "text"}
             value={password}
             onChange={handleSetPassword}
             focusBorderColor={theme.colors.main[500]}
           />
         </FormControl>
+        <Box bg="transparent" boxSize={"50px"} onClick={handleShowPass}>
+         {showPass ?<Image bg={"transparent"} src={monkeyNoSpeak}/>: <Image bg={"transparent"} src={monkeyClosed} />}
+        </Box>
         <FormControl width={"40%"} m={"2em"} isInvalid={!isValid} isRequired>
           <FormLabel color={theme.colors.main[500]}>Retype Password</FormLabel>
           <Input
             color={theme.colors.main[500]}
             textColor={theme.colors.main[500]}
             variant="flushed"
-            type="password"
+            type={!showPass ? "password" : "text"}
             value={passwordReType}
             onChange={handlePassRetype}
             focusBorderColor={theme.colors.main[500]}

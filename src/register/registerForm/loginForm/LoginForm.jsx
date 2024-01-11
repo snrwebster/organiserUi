@@ -4,7 +4,11 @@ import {
   InputRightElement,
   Button,
   InputGroup,
+  Box,
+  Image
 } from "@chakra-ui/react";
+import monkeyClosed from "./../../../assets/MonkeyNoEyes.png";
+import monkeyNoSpeak from "./../../../assets/MonkeyNoSpeak.png";
 import { useState } from "react";
 import apiUserReqHandler from "../../../helpers/apiRequest";
 import { useNavigate } from "react-router-dom";
@@ -31,7 +35,7 @@ const LoginForm = () => {
           localStorage.setItem('User',JSON.stringify(user));
           navigate("/Main")
         }
-        else{setPassword("Incorrect Password")}
+        else{setPassword("")}
       });
     }
   };
@@ -64,15 +68,9 @@ const LoginForm = () => {
             onChange={handlePassword}
           />
           <InputRightElement>
-            <Button
-              variant={"ghost"}
-              h="1.5em"
-              fontSize={"1em"}
-              mr={"20px"}
-              onClick={() => setShow(!show)}
-            >
-              {show ? "Hide" : "Show"}
-            </Button>
+          <Box bg="transparent" boxSize={"35px"} onClick={()=>setShow(!show)}>
+         {show ?<Image bg={"transparent"} src={monkeyNoSpeak}/>: <Image bg={"transparent"} src={monkeyClosed} />}
+        </Box>
           </InputRightElement>
         </InputGroup>
       </FormLabel>
