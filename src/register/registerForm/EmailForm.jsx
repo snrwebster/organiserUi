@@ -11,7 +11,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { useTheme } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import apiUserReqHandler from "../../helpers/apiRequest";
+import apiReqHandler from "../../helpers/apiRequest";
 
 export const EmailForm = () => {
   const [userEmail, setUserEmail] = useState("");
@@ -50,9 +50,10 @@ export const EmailForm = () => {
     e.preventDefault();
 
     if (validRegex.test(userEmail)) {
+      const api = "https://localhost:7111/SnrOrgApi/User/";
       try {
         setIsLoading(true);
-        apiUserReqHandler(`CheckUser/`, userEmail, `GET`)
+        apiReqHandler(api,`CheckUser/`, userEmail, `GET`)
           .then((response) => {
             setIsEmailRegistered(response.IsEmailRegistered);
           })

@@ -40,8 +40,15 @@ const RegistrationForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const newUser =JSON.parse(localStorage.getItem("User"));
+    newUser.userName = fName;
+    newUser.fName = fName;
+    newUser.lName = lName;
+    newUser.password = password;
+    console.log(newUser)
     if (isValid) {
-      apiRequest("CreateUSer", User, "POST").then((response) => {
+      apiRequest("CreateUser", newUser, "POST").then((response) => {
+        console.log(response)
         setUserCreated(response.Success);
       });
     } else {
@@ -58,12 +65,6 @@ const RegistrationForm = () => {
   }, []);
   useEffect(() => {
     if (userCreated) {
-      var User = JSON.parse(localStorage.getItem("User"));
-      User.userName = fName;
-      User.fName = fName;
-      User.lName = lName;
-      User.password = password;
-      localStorage.setItem("User", JSON.stringify(User));
       navigate("/Login");
     }
   }, [userCreated]);

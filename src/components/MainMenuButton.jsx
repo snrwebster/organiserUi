@@ -13,12 +13,14 @@ const MainMenuButton = ({ BtnName, BtnBkrd, BtnText, color, navTarget }) => {
     setIsHovered(false);
   };
   const handleOnClick = (e) => {
+    console.log(e.target.name)
     navigate(`${e.target.name}`)
   };
 
   return (
     <Button
       boxShadow={"70px 42px 37px 1px rgba(0,0,0,0.77)"}
+      textColor={isHovered ? `${color}` : "transparent"}
       transitionDuration={"1s"}
       _hover={{
         boxShadow: "5px 9px 7px 1px rgba(0,0,0,0.77)",
@@ -36,7 +38,7 @@ const MainMenuButton = ({ BtnName, BtnBkrd, BtnText, color, navTarget }) => {
       onMouseEnter={handleMouseOver}
       onMouseLeave={handleMouseLeave}
     >
-      <Text color={isHovered ? `${color}` : "transparent"}>{BtnText}</Text>
+     {BtnText}
     </Button>
   );
 };

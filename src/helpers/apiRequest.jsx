@@ -1,5 +1,5 @@
-const api = "https://localhost:7111/SnrOrgApi/User/";
-const apiUserReqHandler = async (endpoint, data, method) => {
+
+const apiReqHandler = async (api,endpoint, data, method) => {
   let options = 
   {
     method: method,
@@ -46,4 +46,4 @@ const apiUserReqHandler = async (endpoint, data, method) => {
     }
   }
 };
-export default apiUserReqHandler;
+export default apiReqHandler;

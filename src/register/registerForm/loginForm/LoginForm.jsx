@@ -10,7 +10,7 @@ import {
 import monkeyClosed from "./../../../assets/MonkeyNoEyes.png";
 import monkeyNoSpeak from "./../../../assets/MonkeyNoSpeak.png";
 import { useState } from "react";
-import apiUserReqHandler from "../../../helpers/apiRequest";
+import apiReqHandler from "../../../helpers/apiRequest";
 import { useNavigate } from "react-router-dom";
 
 
@@ -27,7 +27,9 @@ const LoginForm = () => {
       const endpoint = "Login";
       const data = { email: user.email, password: password };
       const method = "POST";
-      apiUserReqHandler(endpoint, data, method).then((response) => {
+      const api = "https://localhost:7111/SnrOrgApi/User/";
+      apiReqHandler(api,endpoint, data, method).then((response) => {
+        
         if (response) {
           user.fName = response.fName;
           user.lName = response.lName;
