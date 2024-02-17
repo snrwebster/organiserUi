@@ -6,7 +6,7 @@ import { useState } from "react";
 
 const CategoryBills = () => {
   const [openButton, setOpenButton] = useState(null); 
-  const [isLoading,setIsLoading]= useState(false)
+  const [isLoading,setIsLoading]= useState(false);
   const handleToggle = (buttonType) => {
     console.log(openButton)
     setOpenButton((prev) => (prev === buttonType ? null : buttonType));
