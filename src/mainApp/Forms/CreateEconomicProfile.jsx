@@ -10,12 +10,17 @@ import { useState } from "react";
 import './CreateEconomicProfile.css'
 
 const CreateEconomicProfile = () => {
-  const [employee, setEmployee] = useState('');
-  const [salary, setSalary] = useState('');
+  const [formData, setFormData] = useState({
+    employee: '',
+    salary: ''
+  });
 
   const handleEmployeeChange = (event) => {
     console.log(event)
-    setEmployee(event);
+   setFormData({
+    ...formData,
+    employee:event
+   })
   };
 
   const handleSalaryChange = (event) => {
@@ -24,10 +29,10 @@ const CreateEconomicProfile = () => {
   return (
     <form>
       <div className="form-container">
-        <div className={`form-slide ${employee === "" ? "active" : ""}`}>
+        <div className={`form-slide ${formData.employee === "" ? "active" : ""}`}>
           <FormControl>
             <FormLabel>Employee?</FormLabel>
-            <RadioGroup onChange={(e)=>handleEmployeeChange(e)} value={employee}>
+            <RadioGroup name="employee" onChange={(e)=>handleEmployeeChange(e)} value={formData.employee}>
               <Stack>
                 <Radio value="1">Yes</Radio>
                 <Radio value="2">No</Radio>
@@ -35,7 +40,7 @@ const CreateEconomicProfile = () => {
             </RadioGroup>
           </FormControl>
         </div>
-        <div className={`form-slide ${employee === "1" ? "active" : ""}`}>
+        <div className={`form-slide ${formData.employee === "1" ? "active" : ""}`}>
           <FormControl>
             <FormLabel>Monthly salary:</FormLabel>
             <Input type="text" />
